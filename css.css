@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: darksalmon;
+}
+
+.imageBox {
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(160px * 3);
+}
+
+.puzzleBox {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.fill {
+    /* background-image: url('http://source.unsplash.com/random/160x160'); */
+    position: relative;
+    height: 160px;
+    width: 160px;
+    top: 0px;
+    left: 0px;
+    cursor: pointer;
+    background-size: contain;
+}
+
+.empty {
+    display: block;
+    height: 160px;
+    width: 160px;
+    background-color: #fff;
+    /* border: 3px salmon solid; */
+}
+
+.hold {
+    border: #ccc 4px solid;
+}
+
+.hovered {
+    border-style: dashed;
+    background: #f4f4f4
+}
+
+.invisible {
+    display: none;
+}
