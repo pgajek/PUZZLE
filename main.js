@@ -66,9 +66,15 @@ class Board {
         this.board = document.querySelector('.imageBox');
         this.empties = document.querySelectorAll('.imageBox div');
         this.emptyNr = 0;
+        this.emptiesClear();
         this.emptiesBindEvents();
 
     };
+    emptiesClear() {
+        for (let empty of this.empties) {
+            empty.innerHTML = '';
+        }
+    }
     emptiesBindEvents() {
         for (const empty of this.empties) {
             empty.addEventListener('dragover', this.dragOver);
