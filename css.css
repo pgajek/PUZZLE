@@ -3,51 +3,122 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
-    background-color: darksalmon;
+    background-color: #222222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-
+div.images{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+    -webkit-transform:translate(-50%,-50%);
+    -moz-transform:translate(-50%,-50%);
+    -ms-transform:translate(-50%,-50%);
+    -o-transform:translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+div.imageBtns{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div.images h1{
+    text-align: center;
+    width: 100%;
+    color: white;
+    text-shadow: 2px 1px 2px black;
+}
+button.imageBtn{
+    height: 160px;
+    width: 160px;
+    background-size: cover;
+    border: none;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    margin: 5px;
+}
+button.imageBtn:hover{
+    filter: brightness(150%);
+    -webkit-filter: brightness(150%);
+}
+button.imageBtn:nth-of-type(1){
+    background-image: url(img/Bez\ nazwy-1.png);
+}
+button.imageBtn:nth-of-type(2){
+    background-image: url(img/witcher.png);
+}
+button.imageBtn:nth-of-type(3){
+    background-image: url(img/charmander.png);
+}
+.main{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 80%;
+    height: 100vh;
+}
+button.stepBack{
+    position: fixed;
+    top: 10%;
+    right: 5%;
+    width: 50px;
+    height: 50px;
+    background-color: royalblue;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 15%;
+    -webkit-border-radius: 15%;
+    -moz-border-radius: 15%;
+    -ms-border-radius: 15%;
+    -o-border-radius: 15%;
+}
+button.stepBack:hover{
+    transform: rotate(-25deg);
+}
 .imageBox {
     display: flex;
     flex-wrap: wrap;
     width: calc(160px * 3);
 }
-
 .puzzleBox {
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
+    width: calc(3*160px);
 }
-
 .fill {
-    /* background-image: url('http://source.unsplash.com/random/160x160'); */
     position: relative;
     height: 160px;
     width: 160px;
-    top: 0px;
-    left: 0px;
+    top: -1px;
+    left: -1px;
     cursor: pointer;
     background-size: contain;
 }
-
 .empty {
     display: block;
     height: 160px;
     width: 160px;
     background-color: #fff;
+    border: 1px dashed gray;
     /* border: 3px salmon solid; */
 }
-
 .hold {
     border: #ccc 4px solid;
 }
-
 .hovered {
     border-style: dashed;
     background: #f4f4f4
 }
-
 .invisible {
     display: none;
 }

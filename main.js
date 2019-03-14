@@ -1,5 +1,5 @@
 class Puzzle {
-    constructor(number) {
+    constructor(number, id) {
         this.div = document.createElement('div');
         this.puzzleSets = [
             [
@@ -36,16 +36,18 @@ class Puzzle {
                 "url('img/char9.png')",
             ]
         ];
-        this.createPuzzle(number);
+        this.createPuzzle(number, id);
     }
-    createPuzzle(number) {
+    createPuzzle(number, id) {
         this.div.classList.add('fill');
         this.div.dataset.puzzleNr = number;
         this.div.draggable = true;
-        document.querySelector('.puzzleBox').appendChild(this.div);
+        // document.querySelector('.puzzleBox').appendChild(this.div);
         this.div.addEventListener('dragstart', this.dragStart);
+        this.div.addEventListener('touch', this.dragStart);
         this.div.addEventListener('dragend', this.dragEnd);
-        this.div.style.backgroundImage = this.puzzleSets[0][number];
+        this.div.addEventListener('touchend', this.dragEnd);
+        this.div.style.backgroundImage = this.puzzleSets[id][number];
     };
     dragStart() {
         this.className += ' hold';
@@ -65,6 +67,7 @@ class Board {
         this.empties = document.querySelectorAll('.imageBox div');
         this.emptyNr = 0;
         this.emptiesBindEvents();
+
     };
     emptiesBindEvents() {
         for (const empty of this.empties) {
@@ -95,24 +98,59 @@ class Board {
         if (this.dataset.emptyNr === game.dragedPuzzle.dataset.puzzleNr) {
             game.dragedPuzzle.draggable = false;
         }
-
     };
+
 }
 // MAIN GAME CLASS *****************************************************************
 class Game {
-    constructor() {
-
+    constructor(id) {
+        this.puzzleBox = document.querySelector('.puzzleBox');
         this.dragedPuzzle = null;
         this.board = new Board();
-        this.createPuzzles();
+        this.puzzles = [];
+        this.clear();
+        this.createPuzzles(id);
     }
-    createPuzzles() {
+    clear() {
+        this.puzzleBox.innerHTML = '';
+    }
+    createPuzzles(id) {
         for (let i = 0; i < 9; i++) {
-            new Puzzle(i);
+            const puzzle = new Puzzle(i, id);
+            this.puzzles.push(puzzle.div);
+        }
+        this.puzzles.sort(() => Math.random() - 0.5);
+        this.puzzles.sort(() => Math.random() - 0.5);
+        for (let puzzle of this.puzzles) {
+            document.querySelector('.puzzleBox').appendChild(puzzle);
         }
     }
 
 
 }
 
-const game = new Game();
+// const game = new Game(0);
+function createGame() {
+
+    main.style.display = 'flex';
+    divBtns.style.display = 'none';
+    if (this.id === 'bt1') {
+        game = new Game(0);
+    } else if (this.id === 'bt2') {
+        game = new Game(1);
+    } else if (this.id === 'bt3') {
+        game = new Game(2);
+    }
+}
+const stepBack = document.querySelector('.stepBack');
+let game;
+const buttons = document.querySelectorAll('.imageBtn');
+const divBtns = document.querySelector('.images');
+const main = document.querySelector('.main');
+for (let btn of buttons) {
+    btn.addEventListener('click', createGame);
+}
+stepBack.addEventListener('click', function () {
+    main.style.display = 'none';
+    divBtns.style.display = 'flex';
+})
